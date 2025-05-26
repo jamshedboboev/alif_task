@@ -2,8 +2,8 @@ from sqlite3 import connect, Error
 
 create_table_query = """
     CREATE TABLE IF NOT EXISTS rooms_rent (
-        room_id INTEGER PRIMARY KEY,
         room_name TEXT NOT NULL,
+        status INTEGER NOT NULL CHECK (status IN (0, 1)),
         customer TEXT,
         email TEXT,
         number TEXT,
@@ -12,11 +12,11 @@ create_table_query = """
 """
 
 ROOMS = [
-    (1, "Конференц-зал", 1, "Али", "Alichon@test.com", "+992987654321", "2024-05-28 10:00", "2024-05-28 11:00"),
-    (2, "Переговорная A", 0, None, None, None, None, None),
-    (3, "Переговорная B", 0, None, None, None, None, None),
-    (4, "Открытая зона", 1, "Сухроб", "Suhrob_HR@test.com", "+992912345678", "2024-05-28 13:00", "2024-05-28 16:30"),
-    (5, "Мини-офис", 0, None, None, None, None, None),
+    ("Конференц-зал", 1, "Али", "Alichon@test.com", "+992987654321", "2024-05-28 10:00", "2024-05-28 11:00"),
+    ("Переговорная A", 0, None, None, None, None, None),
+    ("Переговорная B", 0, None, None, None, None, None),
+    ("Открытая зона", 1, "Сухроб", "Suhrob_HR@test.com", "+992912345678", "2024-05-28 13:00", "2024-05-28 16:30"),
+    ("Мини-офис", 0, None, None, None, None, None),
 ]
 
 def init_database(query: str = create_table_query, db_path: str = "alif_task/office.db") -> None:
@@ -37,9 +37,9 @@ def insert_rooms(insert_data: list[tuple] = ROOMS, db_path: str = "alif_task/off
             cursor.executemany(
                 '''
                 INSERT INTO rooms_rent (
-                    room_id, room_name, status, customer, email, number, start, end
+                    room_name, status, customer, email, number, start, end
                 )
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
                 ''',
                 insert_data
             )
