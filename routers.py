@@ -2,7 +2,7 @@ from sqlite3 import connect, Error
 import pandas as pd
 
 def get_room(room_name: str, db_path: str = "alif_task/office.db"):
-    """Полуает запись из таблицы rooms_rent."""
+    """Полуает запись из таблицы rooms_rent"""
 
     try:
         with connect(db_path) as conn:
@@ -26,7 +26,7 @@ def add_room(
     status: int = 1,
     db_path: str = "alif_task/office.db"
 ) -> bool:
-    """Добавляет новую запись в таблицу rooms_rent."""
+    """Добавляет новую запись в таблицу rooms_rent"""
 
     insert_query = """
         INSERT INTO rooms_rent (

@@ -13,7 +13,7 @@ create_table_query = """
 
 ROOMS = [
     ("Конференц-зал", 1, "Али", "Alichon@test.com", "+992987654321", "2024-05-28 10:00", "2024-05-28 11:00"),
-    ("Переговорная A", 0, None, None, None, None, None),
+    ("Переговорная A", 0, None, None, None, None),
     ("Переговорная B", 0, None, None, None, None, None),
     ("Открытая зона", 1, "Сухроб", "Suhrob_HR@test.com", "+992912345678", "2024-05-28 13:00", "2024-05-28 16:30"),
     ("Мини-офис", 0, None, None, None, None, None),
