@@ -1,5 +1,7 @@
 from sqlite3 import connect, Error
+
 import pandas as pd
+from loguru import logger
 
 def get_room(room_name: str, db_path: str = "alif_task/office.db"):
     """Полуает запись из таблицы rooms_rent"""
@@ -13,7 +15,7 @@ def get_room(room_name: str, db_path: str = "alif_task/office.db"):
             return pd.DataFrame(row, columns=['room_name', 'status', 'customer', 'email', 'number', 'start', 'end'])
         
     except Error as e:
-        print(f"Ошибка при чтении данных: {e}")
+        logger.error(f"Ошибка при чтении данных: {e}")
         return False
 
 def add_room(
@@ -40,9 +42,9 @@ def add_room(
             cursor.execute(insert_query, (room_name, status, customer, email, number, start, end))
             conn.commit()
 
-            print(f"Бронь комнаты {room_name}, с {start} до {end}")
+            logger.info(f"Бронь комнаты {room_name}, с {start} до {end}")
             return True
 
     except Error as e:
-        print(f"Ошибка при добавлении данных: {e}")
+        logger.error(f"Ошибка при добавлении данных: {e}")
         return False
